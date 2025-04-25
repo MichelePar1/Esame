@@ -1,5 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { assigmentEntity } from './assigments.entity';
+import { UserModel } from '../user/user.model';
+import { User } from '../user/user.entity';
+import { TypedRequest } from '../../lib/typed-request.interface';
 
 const assigmentScheme = new Schema<assigmentEntity>({
     title: { type: String, required: true },
@@ -11,6 +14,8 @@ const assigmentScheme = new Schema<assigmentEntity>({
     classRoomId: { type: String, required: true },
     studentId: [{ type: String }] 
   });
+
+
 
 
 

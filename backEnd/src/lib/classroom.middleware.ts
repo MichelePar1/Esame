@@ -10,7 +10,6 @@ export async function isInClass(
   try {
     const classId = req.params.classId;
     const userId = (req.user as User).id;
-
     const classroomFound = await classModel.find({
       id: classId,
       students: userId 

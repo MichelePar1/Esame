@@ -12,3 +12,7 @@ export type assigmentEntity = {
     createdBy: User|string
     classRoomId: string
 }
+
+export type PopulateCreatedBy = Omit<assigmentEntity, 'createdBy'> & {
+    createdBy: User | null;
+}
