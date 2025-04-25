@@ -13,12 +13,6 @@ const assigmentScheme = new Schema<assigmentEntity>({
   });
 
 
-assigmentScheme.virtual('byTeacher').get(function () {
-    if (typeof this.createdBy === 'object' && 'role' in this.createdBy) {
-        return this.createdBy.role === 'teacher';
-    }
-    return false;
-});
 
 
 assigmentScheme.set('toJSON', {
@@ -29,10 +23,6 @@ assigmentScheme.set('toJSON', {
         delete ret.studentId
         delete ret._id
         delete ret.classRoomId
-        if (ret.byTeacher) {
-            delete ret.completed;
-        }
-        delete ret.byTeacher;
         return ret;
     }
 });

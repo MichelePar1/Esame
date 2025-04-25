@@ -12,6 +12,12 @@ export async function addAssigment(data: object): Promise<assigmentEntity> {
 }
 
 export async function fetchAssigment(userId: string, classRoomId: string): Promise<assigmentEntity[] | null> {
-     const listOfAssig = await assigmentModel.find({studentId: userId , classRoomId: classRoomId}).populate('createdBy')
+  const listOfAssig = await assigmentModel.find(
+    {
+      $or: [
+        { studentId: userId, classRoomId: classRoomId }, 
+        { createdBy: userId, classRoomId: classRoomId }
+          ]}
+  ).populate('createdBy');
        return listOfAssig
 }
