@@ -65,9 +65,6 @@ export const listAssigments = async (
 
 
       const result = await fetchAssigment(userId, classId)
-
-
-
     res.json(result).status(200)
   }catch(err){
     next(err)

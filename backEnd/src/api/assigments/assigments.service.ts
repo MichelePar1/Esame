@@ -18,6 +18,6 @@ export async function fetchAssigment(userId: string, classRoomId: string): Promi
         { studentId: userId, classRoomId: classRoomId }, 
         { createdBy: userId, classRoomId: classRoomId }
           ]}
-  ).populate('createdBy');
+  ).populate('createdBy')
        return listOfAssig
 }

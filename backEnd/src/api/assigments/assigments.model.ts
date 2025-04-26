@@ -1,8 +1,12 @@
-import { Schema, model } from 'mongoose';
+import { Query, Schema, model } from 'mongoose';
 import { assigmentEntity } from './assigments.entity';
 import { UserModel } from '../user/user.model';
 import { User } from '../user/user.entity';
 import { TypedRequest } from '../../lib/typed-request.interface';
+import { method } from 'lodash';
+import { isTeacher } from '../../lib/teacher.middleware';
+
+
 
 const assigmentScheme = new Schema<assigmentEntity>({
     title: { type: String, required: true },
@@ -17,8 +21,13 @@ const assigmentScheme = new Schema<assigmentEntity>({
 
 
 
+  assigmentScheme.pre('find', function(next) {
+    if(isTeacher(req)){
+        return true
+    }
 
-
+    next();
+});
 
 assigmentScheme.set('toJSON', {
     virtuals: true,
@@ -28,6 +37,7 @@ assigmentScheme.set('toJSON', {
         delete ret.studentId
         delete ret._id
         delete ret.classRoomId
+
         return ret;
     }
 });
