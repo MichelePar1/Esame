@@ -10,6 +10,8 @@ import mongoose from "mongoose";
 import { ClassRoomNotFoundError } from "../../errors/classRoom-not-found.error";
 import { wrongClassroomError } from "../../errors/wrongClass.error";
 import dayjs from "dayjs";
+import { json } from "body-parser";
+import { omit } from "lodash";
 
 
 
@@ -45,7 +47,6 @@ export const createAssigment = async (
       }
       
       const result = await addAssigment(Objectaa)
-      result.createdAt = new Date(dayjs(result.createdAt).format('YYYY-MM-DD'));
       res.json(result).status(200)
     }catch(err){
       next(err)

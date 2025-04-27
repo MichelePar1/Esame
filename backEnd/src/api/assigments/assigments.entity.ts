@@ -7,7 +7,7 @@ export type assigmentEntity = {
     studentId: [string],
     studentsCount: string,
     completedCount: string,
-    completed: boolean;
+    completed?: boolean;
     createdAt: Date,
     createdBy: User|string
     classRoomId: string

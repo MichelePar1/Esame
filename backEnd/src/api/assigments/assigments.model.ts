@@ -3,9 +3,11 @@ import { assigmentEntity } from './assigments.entity';
 import { UserModel } from '../user/user.model';
 import { User } from '../user/user.entity';
 import { TypedRequest } from '../../lib/typed-request.interface';
-import { method } from 'lodash';
+import { omit } from 'lodash';
 import { isTeacher } from '../../lib/teacher.middleware';
 
+//per far si che lo possa prendere dentro assigmentScheme.set 
+// estende l'entita di assigmentEntity altrimenti non lo posso usare come "filtro"
 interface AssigmentUserRole extends assigmentEntity{
     _userRole: string  
 }
@@ -36,6 +38,12 @@ const assigmentScheme = new Schema<assigmentEntity>({
     });
     next()
   })
+
+  assigmentScheme.post('save', function(documenti, next){
+    delete documenti.toObject().completed
+    next()
+  })
+
 assigmentScheme.set('toJSON', {
     virtuals: true,
     transform: (_, ret) => {
