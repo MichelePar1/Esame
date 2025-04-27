@@ -60,12 +60,13 @@ export const listAssigments = async (
   next: NextFunction) => {
     try{      
       const userId = (req.user as User).id!
+      const userRole = (req.user as User).role!
       const classId = req.params.classId;
       const specClass = await getSpecificClass(classId)
 
 
       const result = await fetchAssigment(userId, classId)
-    res.json(result).status(200)
+    res.json({result,userRole}).status(200)
   }catch(err){
     next(err)
   }

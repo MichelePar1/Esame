@@ -21,17 +21,9 @@ const assigmentScheme = new Schema<assigmentEntity>({
 
 
 
-  assigmentScheme.pre('find', function(next) {
-    if(isTeacher(req)){
-        return true
-    }
-
-    next();
-});
-
 assigmentScheme.set('toJSON', {
     virtuals: true,
-    transform: (_, ret) => {
+    transform: (_, ret, role) => {
         delete ret.__v;
         delete ret.students
         delete ret.studentId

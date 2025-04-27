@@ -10,6 +10,7 @@ export async function isInClass(
   try {
     const classId = req.params.classId;
     const userId = (req.user as User).id;
+    const userRole = (req.user as User).role;
     const classroomFound = await classModel.find({
       id: classId,
       students: userId 
@@ -19,7 +20,7 @@ export async function isInClass(
       res.status(404).json({ message: 'Non sei iscritto a questa classe' });
       return;
     }
-
+    req.classRole = userRole
     next();
   } catch (error) {
     next(error)

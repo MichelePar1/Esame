@@ -5,6 +5,9 @@ import { User as iUser } from '../../api/user/user.entity';
 
 declare global {
     namespace Express {
-        interface User extends iUser { }
+        interface Request {
+            classRole?: string; 
+          }
+ interface User extends iUser { }
     }
 }
