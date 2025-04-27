@@ -6,6 +6,10 @@ import { TypedRequest } from '../../lib/typed-request.interface';
 import { method } from 'lodash';
 import { isTeacher } from '../../lib/teacher.middleware';
 
+interface AssigmentUserRole extends assigmentEntity{
+    _userRole: string  
+}
+
 
 
 const assigmentScheme = new Schema<assigmentEntity>({
@@ -20,16 +24,30 @@ const assigmentScheme = new Schema<assigmentEntity>({
   });
 
 
+  assigmentScheme.pre('find', function(next){
+    const userRole = this.getOptions().userRole
+    next()
+  })
 
+  assigmentScheme.post('find', function(documenti, next){
+    const userRole = this.getOptions().userRole
+    documenti.forEach(doc => {
+        doc._userRole = userRole
+    });
+    next()
+  })
 assigmentScheme.set('toJSON', {
     virtuals: true,
-    transform: (_, ret, role) => {
+    transform: (_, ret) => {
+        const documenti = _ as unknown as AssigmentUserRole
+        if(documenti._userRole==='teacher'){
+            delete ret.completed
+        }
         delete ret.__v;
         delete ret.students
         delete ret.studentId
         delete ret._id
         delete ret.classRoomId
-
         return ret;
     }
 });

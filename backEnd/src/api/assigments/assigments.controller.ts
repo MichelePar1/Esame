@@ -44,7 +44,6 @@ export const createAssigment = async (
         classRoomId: classId
       }
       
-  
       const result = await addAssigment(Objectaa)
       result.createdAt = new Date(dayjs(result.createdAt).format('YYYY-MM-DD'));
       res.json(result).status(200)
@@ -65,8 +64,8 @@ export const listAssigments = async (
       const specClass = await getSpecificClass(classId)
 
 
-      const result = await fetchAssigment(userId, classId)
-    res.json({result,userRole}).status(200)
+      const result = await fetchAssigment(userId, classId, userRole)
+    res.json(result).status(200)
   }catch(err){
     next(err)
   }
