@@ -2,6 +2,7 @@ import { omit } from "lodash";
 import { classEntity } from "../classroom/classroom.entity";
 import { assigmentEntity } from "./assigments.entity";
 import { assigmentModel } from "./assigments.model";
+import { use } from "passport";
 
 
 
@@ -11,14 +12,19 @@ export async function addAssigment(data: object): Promise<assigmentEntity> {
     return newClass;    
 }
 
-export async function fetchAssigment(userId: string, classRoomId: string, userRole: string): Promise<assigmentEntity[] | null> {
+export async function fetchAssigment(userId: string, classRoomId: string): Promise<assigmentEntity[] | null> {
   const listOfAssig = await assigmentModel.find(
     {
       $or: [
-        { studentId: userId, classRoomId: classRoomId }, 
+        { 'students.studentsId': userId, classRoomId: classRoomId }, 
         { createdBy: userId, classRoomId: classRoomId }
           ]}
-  ).setOptions({userRole}) //setOptions, così evito di fare tutti i controlli nel controller
+  )
   .populate('createdBy')
+  .populate({
+    path:'forStudent',
+    match:{_id: userId}
+  }
+  )
        return listOfAssig
 }

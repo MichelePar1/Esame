@@ -6,11 +6,6 @@ import { TypedRequest } from '../../lib/typed-request.interface';
 import { omit } from 'lodash';
 import { isTeacher } from '../../lib/teacher.middleware';
 
-//per far si che lo possa prendere dentro assigmentScheme.set 
-// estende l'entita di assigmentEntity altrimenti non lo posso usare come "filtro"
-interface AssigmentUserRole extends assigmentEntity{
-    _userRole: string  
-}
 
 
 
@@ -22,34 +17,35 @@ const assigmentScheme = new Schema<assigmentEntity>({
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },    
     students:[{
       completed: { type: Boolean, default: false },
-      studentId: { type: String }}] ,
-    classRoomId: { type: String, required: true }
+      studentsId: { type: String }}] ,
+    classRoomId: { type: String, required: true },
+    forStudent: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }]
 
   });
 
-
-
-  assigmentScheme.post('find', function(documenti, next){
-    const userRole = this.getOptions().userRole
-    documenti.forEach(doc => {
-        doc._userRole = userRole
-    });
-    next()
+assigmentScheme.virtual('completed').get(function(){
+  const student = this.forStudent?.[0] as any;
+  let cc 
+  this.students.map(s=>{
+    if(s.studentsId==student.id){
+      console.log(s.completed)
+      cc = s.completed
+    }
   })
+  return cc
+   
 
+})
+
+  
 
 assigmentScheme.set('toJSON', {
     virtuals: true,
     transform: (_, ret) => {
-        const documenti = _ as unknown as AssigmentUserRole
-        if(documenti._userRole==='teacher'){
-            delete ret.completed
-        }
         delete ret.__v;
-        delete ret.students
-        delete ret.studentId
         delete ret._id
         delete ret.classRoomId
+        delete ret.students
         return ret;
     }
 });

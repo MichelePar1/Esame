@@ -6,13 +6,14 @@ export type assigmentEntity = {
     title: string,
     students:Array<{
         studentsId: [string]
-        completd: [boolean]
+        completed: [boolean]
     }>
     studentsCount: string,
     completedCount: string,
     createdAt: Date,
     createdBy: User|string
     classRoomId: string
+    forStudent?: [User|string]
 }
 
 export type PopulateCreatedBy = Omit<assigmentEntity, 'createdBy'> & {

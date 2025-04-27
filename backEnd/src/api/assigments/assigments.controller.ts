@@ -34,7 +34,7 @@ export const createAssigment = async (
       if(userId!=specClass?.createdBy){
         throw new wrongClassroomError()
       }
-
+      console.log(specClass.students)
       const Objectaa = {
         title: title,
         studentsCount: specClass?.students?.length,
@@ -45,7 +45,9 @@ export const createAssigment = async (
           studentsId: student,
           completed: false
         })),
-        classRoomId: classId
+        classRoomId: classId,
+        forStudent: specClass.students
+
       }
       
       const result = await addAssigment(Objectaa)
@@ -65,9 +67,8 @@ export const listAssigments = async (
       const userRole = (req.user as User).role!
       const classId = req.params.classId;
       const specClass = await getSpecificClass(classId)
+      const result = await fetchAssigment(userId, classId)
 
-
-      const result = await fetchAssigment(userId, classId, userRole)
     res.json(result).status(200)
   }catch(err){
     next(err)
