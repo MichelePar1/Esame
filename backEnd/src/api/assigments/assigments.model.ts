@@ -12,7 +12,6 @@ import { isTeacher } from '../../lib/teacher.middleware';
 const assigmentScheme = new Schema<assigmentEntity>({
     title: { type: String, required: true },
     studentsCount: Number,      
-    completedCount: Number,       
     createdAt: { type: Date, default: Date.now },
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },    
     students:[{
@@ -20,21 +19,31 @@ const assigmentScheme = new Schema<assigmentEntity>({
       studentsId: { type: String }}] ,
     classRoomId: { type: String, required: true },
     forStudent: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }]
-
   });
 
-assigmentScheme.virtual('completed').get(function(){
-  const student = this.forStudent?.[0] as any;
-  let cc 
+
+assigmentScheme.virtual('completedCount').get(function(){
+  let c=0
   this.students.map(s=>{
-    if(s.studentsId==student.id){
-      console.log(s.completed)
-      cc = s.completed
+    if(s?.completed){
+      c+=1
     }
   })
-  return cc
-   
-
+  return c
+})
+assigmentScheme.virtual('completed').get(function(){
+  const student = this.forStudent?.[0] as any;
+  let completed
+  if(!student?.id){
+    return
+  }
+  this.students.map(s=>{
+    if(s.studentsId==student?.id){
+      console.log(s.completed)
+      completed = s.completed
+    }
+  })
+  return completed
 })
 
   
@@ -46,6 +55,7 @@ assigmentScheme.set('toJSON', {
         delete ret._id
         delete ret.classRoomId
         delete ret.students
+        delete ret.forStudent
         return ret;
     }
 });

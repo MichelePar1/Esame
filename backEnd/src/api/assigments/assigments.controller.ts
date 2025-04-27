@@ -4,7 +4,7 @@ import { User } from "../user/user.entity";
 import { Request, Response, NextFunction } from "express";
 import { assigmentDto } from "./assigment.dto";
 import { assigmentEntity } from "./assigments.entity";
-import { addAssigment, fetchAssigment } from "./assigments.service";
+import { addAssigment, fetchAssigment, checkCompleted } from "./assigments.service";
 import { classEntity } from "../classroom/classroom.entity";
 import mongoose from "mongoose";
 import { ClassRoomNotFoundError } from "../../errors/classRoom-not-found.error";
@@ -12,6 +12,7 @@ import { wrongClassroomError } from "../../errors/wrongClass.error";
 import dayjs from "dayjs";
 import { json } from "body-parser";
 import { omit } from "lodash";
+import { use } from "passport";
 
 
 
@@ -64,10 +65,49 @@ export const listAssigments = async (
   next: NextFunction) => {
     try{      
       const userId = (req.user as User).id!
-      const userRole = (req.user as User).role!
       const classId = req.params.classId;
       const specClass = await getSpecificClass(classId)
+      if(!specClass){
+        throw new ClassRoomNotFoundError()
+      }
+      if((userId!=specClass?.createdBy)&&((req.user as User).role == "teacher")){
+        throw new wrongClassroomError()
+      }
+      if(!specClass.students?.find(s=>s==userId)){
+        //lancia l'errore sbagliato ma è per farmi una idea
+        throw new wrongClassroomError()
+      }
+      
       const result = await fetchAssigment(userId, classId)
+
+    res.json(result).status(200)
+  }catch(err){
+    next(err)
+  }
+}
+
+export const CompleteAssigment = async (
+  req: TypedRequest<assigmentDto>, 
+  res: Response, 
+  next: NextFunction) => {
+    try{      
+      const userId = (req.user as User).id!
+      const classId = req.params.classId;
+      const assigmentId = req.params.id
+      const specClass = await getSpecificClass(classId)
+      if(!specClass){
+        throw new ClassRoomNotFoundError()
+      } 
+      if((userId!=specClass?.createdBy)&&((req.user as User).role == "teacher")){
+        throw new wrongClassroomError()
+      }
+      if(!specClass.students?.find(s=>s==userId)){
+        //lancia l'errore sbagliato ma è per farmi una idea
+        throw new wrongClassroomError()
+      }
+
+      console.log(specClass.students)
+      const result = await checkCompleted(userId, classId, assigmentId)
 
     res.json(result).status(200)
   }catch(err){
@@ -75,3 +115,4 @@ export const listAssigments = async (
   }
 
 }
+

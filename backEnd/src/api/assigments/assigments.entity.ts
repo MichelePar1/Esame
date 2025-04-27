@@ -9,7 +9,6 @@ export type assigmentEntity = {
         completed: [boolean]
     }>
     studentsCount: string,
-    completedCount: string,
     createdAt: Date,
     createdBy: User|string
     classRoomId: string
