@@ -39,10 +39,12 @@ export const createAssigment = async (
         title: title,
         studentsCount: specClass?.students?.length,
         completedCount: "0",
-        completed: false,
         createdAt: date,
         createdBy: specClass?.createdBy,
-        studentId: specClass?.students,
+        students: specClass?.students?.map(student=>({
+          studentsId: student,
+          completed: false
+        })),
         classRoomId: classId
       }
       

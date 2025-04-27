@@ -18,18 +18,16 @@ const assigmentScheme = new Schema<assigmentEntity>({
     title: { type: String, required: true },
     studentsCount: Number,      
     completedCount: Number,       
-    completed: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
-    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    classRoomId: { type: String, required: true },
-    studentId: [{ type: String }] 
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },    
+    students:[{
+      completed: { type: Boolean, default: false },
+      studentId: { type: String }}] ,
+    classRoomId: { type: String, required: true }
+
   });
 
 
-  assigmentScheme.pre('find', function(next){
-    const userRole = this.getOptions().userRole
-    next()
-  })
 
   assigmentScheme.post('find', function(documenti, next){
     const userRole = this.getOptions().userRole
@@ -39,10 +37,6 @@ const assigmentScheme = new Schema<assigmentEntity>({
     next()
   })
 
-  assigmentScheme.post('save', function(documenti, next){
-    delete documenti.toObject().completed
-    next()
-  })
 
 assigmentScheme.set('toJSON', {
     virtuals: true,

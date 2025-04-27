@@ -4,10 +4,12 @@ import { User } from "../user/user.entity";
 export type assigmentEntity = {
     id: string,
     title: string,
-    studentId: [string],
+    students:Array<{
+        studentsId: [string]
+        completd: [boolean]
+    }>
     studentsCount: string,
     completedCount: string,
-    completed?: boolean;
     createdAt: Date,
     createdBy: User|string
     classRoomId: string
