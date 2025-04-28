@@ -15,7 +15,7 @@ export const list = async (
     res: Response, 
     next: NextFunction) => {
         try{
-            const ruolo = req.query.Role as string;
+            const ruolo = req.query.type as string;
             const users = await fetch(ruolo)
             res.json(users)
             

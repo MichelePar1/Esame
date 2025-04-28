@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import {User} from "../api/user/user.entity";
-import { assigmentModel } from "../api/assigments/assigments.model";
+import { assigmentModel } from "../api/classroom/assigments/assigments.model";
 
 
 export function isStudent(

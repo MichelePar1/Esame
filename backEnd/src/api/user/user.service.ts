@@ -41,11 +41,12 @@ export class UserService {
 export async function fetch(ruolo: string): Promise<User[]>{
 
     let listOfUser: User[] = [];
+      console.log(ruolo)
     if(!ruolo){
         listOfUser = await UserModel.find();  
         return listOfUser    
     }
-    if((ruolo=="Student")||((ruolo=="Prof"))){
+    if((ruolo=="student")||((ruolo=="teacher"))){
         listOfUser = await UserModel.find({role: ruolo});  
 
     }else{

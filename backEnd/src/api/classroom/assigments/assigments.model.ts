@@ -1,10 +1,10 @@
 import { Query, Schema, model } from 'mongoose';
 import { assigmentEntity } from './assigments.entity';
-import { UserModel } from '../user/user.model';
-import { User } from '../user/user.entity';
-import { TypedRequest } from '../../lib/typed-request.interface';
+import { UserModel } from '../../user/user.model';
+import { User } from '../../user/user.entity';
+import { TypedRequest } from '../../../lib/typed-request.interface';
 import { omit } from 'lodash';
-import { isTeacher } from '../../lib/teacher.middleware';
+import { isTeacher } from '../../../lib/teacher.middleware';
 
 
 
@@ -39,7 +39,6 @@ assigmentScheme.virtual('completed').get(function(){
   }
   this.students.map(s=>{
     if(s.studentsId==student?.id){
-      console.log(s.completed)
       completed = s.completed
     }
   })

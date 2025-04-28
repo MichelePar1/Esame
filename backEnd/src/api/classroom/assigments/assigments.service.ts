@@ -1,5 +1,5 @@
 import { omit } from "lodash";
-import { classEntity } from "../classroom/classroom.entity";
+import { classEntity } from "../classroom.entity";
 import { assigmentEntity } from "./assigments.entity";
 import { assigmentModel } from "./assigments.model";
 import { use } from "passport";

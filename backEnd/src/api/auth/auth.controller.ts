@@ -44,7 +44,7 @@ export const login = async (
             }
 
             if (!user) {
-                res.status(401);
+                res.status(400);
                 res.json({
                     error: 'LoginError',
                     message: info.message
