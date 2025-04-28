@@ -31,7 +31,7 @@ export async function fetchAssigment(userId: string, classRoomId: string): Promi
 }
 
  export async function checkCompleted(userId: string, classId: string, assigmentId: string): Promise<assigmentEntity|null>{
-  const checkedAssigment = await assigmentModel.findOneAndUpdate({_id:assigmentId, 'students.studentsId': userId},
+  const checkedAssigment = await assigmentModel.findOneAndUpdate({_id:assigmentId, 'students.studentsId': userId, classRoomId: classId},
   {'students.$.completed': true},{new:true}).populate('createdBy')
   .populate({
     path:'forStudent',

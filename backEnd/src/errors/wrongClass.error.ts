@@ -6,6 +6,7 @@ export class wrongClassroomError extends Error {
     }
 }
 
+
 export const wrongClassroomErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof wrongClassroomError) {
         res.status(404).json({
@@ -15,4 +16,5 @@ export const wrongClassroomErrorHandler = (err: Error, req: Request, res: Respon
     } else {
         next(err);
     }
+
 };

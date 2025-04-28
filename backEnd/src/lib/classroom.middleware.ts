@@ -10,15 +10,20 @@ export async function isInClass(
   try {
     const classId = req.params.classId;
     const userId = (req.user as User).id;
+    const classroomExit = await classModel.find({_id:classId})
+    if(classroomExit.length==0){
+      res.status(404).json({ message: 'Non esiste questa classe' });
+    }
     const classroomFound = await classModel.find({
-      id: classId,
-      students: userId 
-    });
-
-    if (!classroomFound) {
-      res.status(404).json({ message: 'Non sei iscritto a questa classe' });
+      $or: [
+        { students: userId, _id: classId }, 
+        { createdBy: userId, _id: classId }
+          ]});
+    if (classroomFound.length==0) {
+      res.status(404).json({ message: 'Non fai parte di questa classe' });
       return;
     }
+    
     next();
   } catch (error) {
     next(error)

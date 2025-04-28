@@ -5,7 +5,8 @@ import { queryNotRightHandler } from './Query.error';
 import { userNotProfHandler } from './not-prof.error';
 import { ClassRoomNotFoundErrorHandler } from './classRoom-not-found.error';
 import { wrongClassroomErrorHandler } from './wrongClass.error';
+import { WrongAssigmentErrorHandler } from './WrongAssigment.error';
 
 export const errorHandlers = [validationHandler, notFoundHandler, 
-    queryNotRightHandler,userNotProfHandler, ClassRoomNotFoundErrorHandler,wrongClassroomErrorHandler,
+    queryNotRightHandler,userNotProfHandler, ClassRoomNotFoundErrorHandler,wrongClassroomErrorHandler,WrongAssigmentErrorHandler,
     genericHandler];

@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import { json } from "body-parser";
 import { omit } from "lodash";
 import { use } from "passport";
+import { WrongAssigmentError } from "../../../errors/WrongAssigment.error";
 
 
 
@@ -66,18 +67,6 @@ export const listAssigments = async (
     try{      
       const userId = (req.user as User).id!
       const classId = req.params.classId;
-      const specClass = await getSpecificClass(classId)
-      if(!specClass){
-        throw new ClassRoomNotFoundError()
-      }
-      if((userId!=specClass?.createdBy)&&((req.user as User).role == "teacher")){
-        throw new wrongClassroomError()
-      }
-      if(!specClass.students?.find(s=>s==userId)){
-        //lancia l'errore sbagliato ma è per farmi una idea
-        throw new wrongClassroomError()
-      }
-      
       const result = await fetchAssigment(userId, classId)
 
     res.json(result).status(200)
@@ -94,21 +83,11 @@ export const CompleteAssigment = async (
       const userId = (req.user as User).id!
       const classId = req.params.classId;
       const assigmentId = req.params.id
-      const specClass = await getSpecificClass(classId)
-      if(!specClass){
-        throw new ClassRoomNotFoundError()
-      } 
-      if((userId!=specClass?.createdBy)&&((req.user as User).role == "teacher")){
-        throw new wrongClassroomError()
-      }
-      if(!specClass.students?.find(s=>s==userId)){
-        //lancia l'errore sbagliato ma è per farmi una idea
-        throw new wrongClassroomError()
-      }
 
-      console.log(specClass.students)
       const result = await checkCompleted(userId, classId, assigmentId)
-
+      if(!result){
+        throw new WrongAssigmentError()
+      }
     res.json(result).status(200)
   }catch(err){
     next(err)
