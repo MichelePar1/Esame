@@ -17,7 +17,9 @@ classroomScheme.virtual('studentsCount').get(function () {
 classroomScheme.set('toJSON', {
     virtuals: true,
     transform: (_, ret) => {
+        ret.id = ret._id;
         delete ret.__v;
+        delete ret._id;
         delete ret.students
         return ret;
     }
