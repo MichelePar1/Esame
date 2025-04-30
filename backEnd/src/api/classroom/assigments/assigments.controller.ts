@@ -85,9 +85,12 @@ export const CompleteAssigment = async (
       const assigmentId = req.params.id
 
       const result = await checkCompleted(userId, classId, assigmentId)
+  
       if(!result){
         throw new WrongAssigmentError()
       }
+
+      
     res.json(result).status(200)
   }catch(err){
     next(err)

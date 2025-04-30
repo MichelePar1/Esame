@@ -6,7 +6,8 @@ import { userNotProfHandler } from './not-prof.error';
 import { ClassRoomNotFoundErrorHandler } from './classRoom-not-found.error';
 import { wrongClassroomErrorHandler } from './wrongClass.error';
 import { WrongAssigmentErrorHandler } from './WrongAssigment.error';
+import { AssigmentAlrCompletedHandler } from './assigment-alr-completed';
 
-export const errorHandlers = [validationHandler, notFoundHandler, 
+export const errorHandlers = [validationHandler, notFoundHandler,AssigmentAlrCompletedHandler,
     queryNotRightHandler,userNotProfHandler, ClassRoomNotFoundErrorHandler,wrongClassroomErrorHandler,WrongAssigmentErrorHandler,
     genericHandler];

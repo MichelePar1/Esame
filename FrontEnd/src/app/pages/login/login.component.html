@@ -15,11 +15,6 @@
         <input type="password" formControlName="password" class="form-control" />
       </div>
 
-      <div class="form-check text-start mb-3">
-        <input type="checkbox" class="form-check-input" id="rememberMe" />
-        <label class="form-check-label" for="rememberMe">Ricordami</label>
-      </div>
-
       <div *ngIf="loginError" class="text-danger">
         {{ loginError }}
       </div>
@@ -28,8 +23,7 @@
     </form>
 
     <div class="extra-options">
-      <div><a href="#">Devi registarti?</a></div>
-      <div><a href="#">&larr; Torna al sito</a></div>
+      <div><a href="/register">Devi registarti?</a></div>
     </div>
   </div>
 </div>

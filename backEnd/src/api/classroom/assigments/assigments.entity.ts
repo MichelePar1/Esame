@@ -5,8 +5,8 @@ export type assigmentEntity = {
     id: string,
     title: string,
     students:Array<{
-        studentsId: [string]
-        completed: [boolean]
+        studentsId: string
+        completed: boolean
     }>
     studentsCount: string,
     createdAt: Date,
