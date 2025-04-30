@@ -10,6 +10,7 @@ export class AddUserDTO {
     username!: string;
     @MinLength(4)
     password!: string;
+    
     role!: string;
     @IsUrl()
     picture!: string;

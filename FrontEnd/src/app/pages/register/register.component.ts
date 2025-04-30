@@ -1,37 +1,45 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil, map, catchError, throwError } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { User } from '../../entities/user.entity';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: false,
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class RegisterComponent {
+
   protected fb = inject(FormBuilder);
   protected authSrv = inject(AuthService);
   protected router = inject(Router);
   protected activatedRoute = inject(ActivatedRoute);
+  protected UserSrv = inject(UserService)
 
   protected destroyed$ = new Subject<void>();
 
-  loginForm = this.fb.group({
+  registerForm = this.fb.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
+    role: ['', Validators.required],
+    picture: ['', Validators.required],
   });
 
-  loginError = '';
+  registerError = '';
 
   requestedUrl: string | null = null;
 
   ngOnInit() {
-    this.loginForm.valueChanges
+    this.registerForm.valueChanges
       .pipe(takeUntil(this.destroyed$))
       .subscribe(_ => {
-        this.loginError = '';
+        this.registerError = '';
       });
 
     this.activatedRoute.queryParams
@@ -49,17 +57,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  login() {
-    const { username, password } = this.loginForm.value;
-    this.authSrv.login(username!, password!)
+  register() {    
+    const user = this.registerForm.value as User
+    this.UserSrv.register(user)
       .pipe(
         catchError(response => {
-          this.loginError = response.error.message;
+          this.registerError = response.error.message;
           return throwError(() => response);
         })
       )
       .subscribe(() => {
-        this.router.navigate([this.requestedUrl ? this.requestedUrl : '/classroom']);
+        this.router.navigate([this.requestedUrl ? this.requestedUrl : '/login']);
       })
   }
 

@@ -4,17 +4,32 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './utils/auth.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IfAuthenticatedDirective } from './utils/if-authenticated.directive';
+import { ClassroomComponent } from './pages/classroom/classroom.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    IfAuthenticatedDirective,
+    ClassroomComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

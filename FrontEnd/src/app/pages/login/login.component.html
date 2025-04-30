@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="container">
+  <div class="login-box">
+    <div class="logo">
+      <img src="https://s.w.org/style/images/about/WordPress-logotype-wmark.png" alt="Logo" width="80">
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div>
+        <label class="form-label">Nome utente</label>
+        <input type="text" formControlName="username" class="form-control" />
+      </div>
+
+      <div>
+        <label class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" />
+      </div>
+
+      <div class="form-check text-start mb-3">
+        <input type="checkbox" class="form-check-input" id="rememberMe" />
+        <label class="form-check-label" for="rememberMe">Ricordami</label>
+      </div>
+
+      <div *ngIf="loginError" class="text-danger">
+        {{ loginError }}
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="extra-options">
+      <div><a href="#">Devi registarti?</a></div>
+      <div><a href="#">&larr; Torna al sito</a></div>
+    </div>
+  </div>
+</div>
