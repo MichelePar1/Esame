@@ -1,1 +1,8 @@
-<p>classroom works!</p>
+
+
+
+  <div class="container" *ngFor="let class of classlist$|async; trackBy: trackById">
+    <app-class-room-card
+    [class]="class">
+    </app-class-room-card>
+  </div>

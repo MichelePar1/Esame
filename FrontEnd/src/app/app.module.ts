@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IfAuthenticatedDirective } from './utils/if-authenticated.directive';
 import { ClassroomComponent } from './pages/classroom/classroom.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ClassRoomCardComponent } from './components/class-room-card/class-room-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginComponent,
     IfAuthenticatedDirective,
     ClassroomComponent,
-    RegisterComponent
+    RegisterComponent,
+    ClassRoomCardComponent
   ],
   imports: [
     BrowserModule,
