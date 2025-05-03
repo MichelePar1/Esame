@@ -29,7 +29,7 @@ import { NavUserComponent } from './components/nav-user/nav-user.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     provideHttpClient(
