@@ -11,6 +11,8 @@ import { IfAuthenticatedDirective } from './utils/if-authenticated.directive';
 import { ClassroomComponent } from './pages/classroom/classroom.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ClassRoomCardComponent } from './components/class-room-card/class-room-card.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NavUserComponent } from './components/nav-user/nav-user.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ClassRoomCardComponent } from './components/class-room-card/class-room-
     IfAuthenticatedDirective,
     ClassroomComponent,
     RegisterComponent,
-    ClassRoomCardComponent
+    ClassRoomCardComponent,
+    NavBarComponent,
+    NavUserComponent
   ],
   imports: [
     BrowserModule,
