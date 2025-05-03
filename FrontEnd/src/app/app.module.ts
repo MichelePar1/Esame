@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ClassRoomCardComponent } from './components/class-room-card/class-room-card.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NavUserComponent } from './components/nav-user/nav-user.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,10 @@ import { NavUserComponent } from './components/nav-user/nav-user.component';
     NavUserComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbDropdownModule
   ],
   providers: [
     provideHttpClient(
