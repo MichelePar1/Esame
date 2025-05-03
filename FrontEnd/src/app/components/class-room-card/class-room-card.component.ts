@@ -14,7 +14,7 @@ export class ClassRoomCardComponent {
   class!: classroomEntity
 
   ngOnInit(){
-    console.log(this.class.name)
+    console.log(this.class)
   }
 
 

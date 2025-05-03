@@ -1,26 +1,23 @@
 .card {
-    height: 240px;
-    width: 240px;
-    border-radius: 10%;
-    border: 1px black solid;
-    background-color: aliceblue;
-    display: flex; /* Usa flexbox per centrare il contenuto */
-    justify-content: center; /* Centra verticalmente il contenuto */
-    align-items: center; /* Centra orizzontalmente il contenuto */
-    padding: 20px;
-  }
-  
-  /* Sezione TopHead */
-  .TopHead {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  /* Sezione Bottom */
-  .Bottom {
-    font-size: 14px;
-    text-align: center;
-  }
-  
+  height: 240px;
+  width: 240px;
+  border: 2px solid black;
+  border-top: none; 
+  border-radius: 16% 15% 10% 10%;
+  background-color: aliceblue;
+  overflow: hidden; 
+  position: relative;
+}
+
+.TopHead {
+  background-color: seagreen;
+  height: 40%;
+  width: 100%;
+  border-radius: 20% 20% 0 0;
+  border-top: 2px solid black;
+}
+
+.TopHead h3{
+  text-align: left;
+  color: white
+}
