@@ -1,6 +1,9 @@
 
 
 <div class="card">
+    <div class="card-inner"> 
+
+        <div class="card-front"> 
     <div class="TopHead">
         <h3>{{class.name}}</h3>
         <p>{{professor.fullName}}</p>
@@ -11,5 +14,18 @@
     <div class="Bottom">
 
     </div>
+        </div>
+        <div class="card-back">
+            <div class="TopHead">
+                <p>{{professor.fullName}}</p>
+                <p>N. studenti iscritti: {{class.studentsCount}}</p>
+            </div>
+            <div class="middle">
+                <div class="cerchio"><h2>{{professor.fullName[0]}}</h2></div>
+            </div>
+            <div class="Bottom">
+        
+            </div>
+        </div>
+    </div>
 </div>
-

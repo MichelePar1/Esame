@@ -5,4 +5,5 @@ export type classroomEntity = {
     name?: string,
     students?: string[];
     createdBy: User|string
+    studentsCount: number
 }

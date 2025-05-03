@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { NavUserComponent } from './components/nav-user/nav-user.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     provideHttpClient(
