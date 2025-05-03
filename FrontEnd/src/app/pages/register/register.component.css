@@ -1,0 +1,80 @@
+body {
+    background-color: #f1f1f1;
+  }
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-box {
+    background-color: #fff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 360px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+    text-align: center;
+  }
+  
+  .logo {
+    margin-bottom: 2rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.25rem;
+    color: #555d66;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  button[type="submit"] {
+    background-color: #2271b1;
+    border: none;
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 3px;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #1d5f91;
+  }
+  
+  .text-danger {
+    color: #d63638;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .extra-options {
+    font-size: 0.875rem;
+    color: #555d66;
+    margin-top: 1rem;
+  }
+  
+  .extra-options a {
+    color: #2271b1;
+    text-decoration: none;
+  }
+  
+  .extra-options a:hover {
+    text-decoration: underline;
+  }
+  

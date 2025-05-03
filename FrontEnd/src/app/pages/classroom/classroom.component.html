@@ -1,0 +1,9 @@
+
+
+<div class="container">
+  <div *ngFor="let class of classlist$|async; trackBy: trackById">
+    <app-class-room-card
+    [class]="class">
+    </app-class-room-card>
+  </div>
+</div>
