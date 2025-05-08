@@ -1,6 +1,15 @@
 <div class="main-layout">
   <div class="sidebar" *ifTeacher>
     <button>Crea classe</button>
+    <app-student-grid
+    [students]="studentList$ | async"
+    (selecStudent) = "resList($event)"
+    ></app-student-grid>
+    <div>
+      <div *ngFor="let student of selectedStudents$ | async;">
+        {{student.firstName}}
+      </div>
+    </div>
   </div>
 
   <div class="content">

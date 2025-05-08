@@ -1,0 +1,15 @@
+<div class="btn-group me-3">
+  <div class="btn-group" ngbDropdown [autoClose]="'outside'" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-outline-danger" ngbDropdownToggle>Studenti</button>
+    <div class="dropdown-menu" ngbDropdownMenu>
+      <button
+        ngbDropdownItem
+        *ngFor="let user of students"
+        (click)="onListChange(user)">
+		<div *ngIf="user?.role != 'teacher'">
+          {{ user?.firstName }}
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

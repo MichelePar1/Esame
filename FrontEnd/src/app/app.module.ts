@@ -15,6 +15,7 @@ import { ClassRoomCardComponent } from './components/class-room-card/class-room-
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { NavUserComponent } from './components/nav-user/nav-user.component';
 import { IfUserIsTeacherDirective } from './utils/if-userIsTeacher.directive';
+import { StudentGridComponentTsComponent } from './components/student-grid.component.ts/student-grid.component.ts.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { IfUserIsTeacherDirective } from './utils/if-userIsTeacher.directive';
     RegisterComponent,
     ClassRoomCardComponent,
     NavBarComponent,
-    NavUserComponent
+    NavUserComponent,
+    StudentGridComponentTsComponent
   ],
   imports: [
     BrowserModule,
