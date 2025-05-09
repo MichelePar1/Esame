@@ -1,6 +1,7 @@
 <div class="main-layout">
   <div class="sidebar" *ifTeacher>
-    <button>Crea classe</button>
+    <input [(ngModel)]="className" placeholder="Nome classe">
+    <button (click)="pushClass(className)">Crea classe</button>
     <app-student-grid
     [students]="studentList$ | async"
     (selecStudent) = "resList($event)"
@@ -14,7 +15,7 @@
 
   <div class="content">
     <div class="container">
-      <div *ngFor="let class of classlist$ | async; trackBy: trackById">
+      <div *ngFor="let class of classi$ | async; trackBy: trackById">
         <app-class-room-card [class]="class"></app-class-room-card>
       </div>
     </div>

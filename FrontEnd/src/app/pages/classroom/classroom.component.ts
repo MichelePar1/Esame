@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ClassRoomSourceService } from '../../services/class-room-source.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, combineLatest } from 'rxjs';
 import { classroomEntity } from '../../entities/classroom.entity';
 import { UserService } from '../../services/user.service';
 import { User } from '../../entities/user.entity';
@@ -17,43 +17,40 @@ export class ClassroomComponent {
   private UserSrv = inject(UserService)
   private ClassRoomSrv = inject(ClassRoomSourceService)
 
-
-  private ClassListSubject = new Subject<classroomEntity[]>();
-  classlist$: Observable<classroomEntity[]> = this.ClassListSubject.asObservable();
+  className: string = '';
 
   studentList$: Observable<User[]> = this.UserSrv.fetchUsers();
   private selectedStudentsSubject = new BehaviorSubject<User[]>([]);
   selectedStudents$ = this.selectedStudentsSubject.asObservable();
 
 
+  refresh$ = new ReplaySubject<void>()
+
+  classi$ = combineLatest([
+    this.refresh$,
+  ]).pipe(
+    switchMap(() => this.ClassRoomSrv.fetchClasses())
+  )
 
   constructor(){
-    this.AuthSrv.fetchUser().subscribe(
-      res => {
-        if(res?.id){
-          console.log(res?.fullName)
-        }else{
-          console.log("errore come sei entrato?")
-        }
-      }      
-    );   
-      this.ClassRoomSrv.fetchClasses().subscribe(classes=>{
-        this.ClassListSubject.next(classes)
-      }
-      )
+    this.refresh$.next()
     }
     
-
-
     trackById(_: any, Class: classroomEntity) {
       return Class.id;
     }
 
-
     resList(list:User[]){
-      console.log(list)
       this.selectedStudentsSubject.next(list)
     }
+
+   pushClass(name: string) {
+    this.selectedStudents$.subscribe(students => {
+    this.ClassRoomSrv.addClassroom(students, name).subscribe()})
+    this.refresh$.next()
+
+  }
+
 
   }
 
