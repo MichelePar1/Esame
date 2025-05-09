@@ -8,12 +8,8 @@ import { User } from '../../entities/user.entity';
   styleUrls: ['./student-grid.component.ts.component.css'],
 })
 export class StudentGridComponentTsComponent {
-
-  @Input()
-  students!: User[] | null;
-
-  @Output()
-  selecStudent = new EventEmitter<User[]>();
+  @Input() students!: User[] | null;
+  @Output() selecStudent = new EventEmitter<User[]>();
 
   studentIds: User[] = [];
 
@@ -31,5 +27,9 @@ export class StudentGridComponentTsComponent {
       }
       this.selecStudent.emit(this.studentIds);
     }
+  }
+
+  isStudentSelected(student: User): boolean {
+    return this.studentIds.includes(student);
   }
 }

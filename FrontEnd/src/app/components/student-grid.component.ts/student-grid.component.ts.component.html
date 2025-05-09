@@ -3,7 +3,12 @@
     <button type="button" class="btn btn-outline-danger" ngbDropdownToggle>Studenti</button>
     <div class="dropdown-menu" ngbDropdownMenu>
       <div *ngFor="let user of students">
-        <button ngbDropdownItem *ngIf="user?.role !== 'teacher'" (click)="onListChange(user)">
+        <button 
+          ngbDropdownItem 
+          *ngIf="user?.role !== 'teacher'" 
+          (click)="onListChange(user)"
+          [ngClass]="{'bg-primary text-white': isStudentSelected(user)}"  
+        >
           {{ user?.firstName }}
         </button>
       </div>
