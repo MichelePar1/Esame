@@ -52,8 +52,8 @@ export class ClassroomComponent {
     this.refresh$.next()
     }
 
-    GoToAssigments(className?:string){
-    this.router.navigate([`/classrooms/${className}/assigments`]);
+    GoToAssigments(classroomId?:string){
+    this.router.navigate([`/classrooms/${classroomId}/assigments`]);
     }
 
 

@@ -1,0 +1,38 @@
+
+
+<div class="card">
+    <div class="card-inner"> 
+
+        <div class="card-front"> 
+    <div class="TopHead">
+        <h3>{{assigment?.title}}</h3>
+        <p>{{professor.fullName}}</p>
+    </div>
+    <div class="middle">
+        <div class="cerchio"><h2>{{professor.fullName[0]}}</h2></div>
+    </div>
+    <div class="Bottom">
+
+    </div>
+        </div>
+        <div class="card-back">
+            <div class="TopHead">
+                <p>{{assigment?.title}}</p>
+                <p>N. studenti che hanno completato: {{assigment?.completedCount}}</p>
+                <div *ifStudent>
+                <p>Stato completato: {{assigment?.completed}}</p>
+                </div>
+            </div>
+            <div class="middle" *ifStudent>
+            
+                <button (click)="CompleteAssigment(assigment?.id)" [disabled]="assigment?.completed">Segna come completato</button>
+            </div>
+            <div class="middle" *ifTeacher>
+                <p>Assignment assegnato a {{assigment?.studentsCount}} studenti</p>
+            </div>
+            <div class="Bottom">
+        
+            </div>
+        </div>
+    </div>
+</div>

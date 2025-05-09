@@ -3,10 +3,10 @@ import { AuthService } from '../services/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Directive({
-  selector: '[ifTeacher]',
+  selector: '[ifStudent]',
   standalone: false
 })
-export class IfUserIsTeacherDirective implements OnInit {
+export class IfUserIsStudentDirective implements OnInit {
 
 
   protected authSrv = inject(AuthService);
@@ -17,7 +17,7 @@ ngOnInit() {
 
 
   this.authSrv.fetchUser().subscribe((user: any)=>{
-    if(user?.role==="teacher"){
+    if(user?.role==="student"){
           this.viewContainer.createEmbeddedView(this.templatedRef);
         } else {
           this.viewContainer.clear();

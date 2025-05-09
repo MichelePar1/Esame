@@ -1,1 +1,18 @@
-<p>assigments.component works!</p>
+
+<div class="main-layout">
+    <div class="sidebar" *ifTeacher>
+     <input [(ngModel)]="assimnetName" placeholder="Nome compito" />
+    <button (click)="pushAssignment(assimnetName)">Crea compito</button>
+
+    </div>
+
+    <div class="assigmentsZone">
+         <div *ngFor="let assigment of assigments$ | async">
+            <app-assigment-card
+            [assigment]="assigment"
+            (selecAssigment)="patchAssigment($event)"
+            ></app-assigment-card>
+         </div>
+    </div>
+    
+</div>

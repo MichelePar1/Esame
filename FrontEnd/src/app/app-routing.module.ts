@@ -21,7 +21,7 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'classrooms/:classId/assigments',
+    path: 'classrooms/:classroomId/assigments',
     component: AssigmentsComponentComponent
   },
   {
