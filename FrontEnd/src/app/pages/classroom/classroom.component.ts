@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, combine
 import { classroomEntity } from '../../entities/classroom.entity';
 import { UserService } from '../../services/user.service';
 import { User } from '../../entities/user.entity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-classroom',
@@ -16,6 +17,7 @@ export class ClassroomComponent {
   private AuthSrv = inject(AuthService)
   private UserSrv = inject(UserService)
   private ClassRoomSrv = inject(ClassRoomSourceService)
+  private router = inject(Router)
 
   className: string = '';
 
@@ -48,9 +50,12 @@ export class ClassroomComponent {
     this.selectedStudents$.subscribe(students => {
     this.ClassRoomSrv.addClassroom(students, name).subscribe()})
     this.refresh$.next()
+    }
 
-  }
+    GoToAssigments(className?:string){
+    this.router.navigate([`/classrooms/${className}/assigments`]);
+    }
 
 
-  }
+  } 
 

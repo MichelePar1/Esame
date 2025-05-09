@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { classroomEntity } from '../../entities/classroom.entity';
 import { User } from '../../entities/user.entity';
 
@@ -14,12 +14,22 @@ export class ClassRoomCardComponent {
   @Input()
   class!: classroomEntity
 
+
+  @Output()
+  selecClass = new EventEmitter<string>();
+
   professor: any
   
   ngOnInit(){
     console.log(this.class)
     this.professor = this.class.createdBy as User
   }
+
+  getClass(idClass?:string){
+    this.selecClass.emit(idClass)
+  }
+
+
 
   
   

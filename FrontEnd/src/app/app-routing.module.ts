@@ -4,6 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ClassroomComponent } from './pages/classroom/classroom.component';
 import { authGuard } from './utils/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
+import { AssigmentsComponentComponent } from './pages/assigments.component/assigments.component.component';
 
 const routes: Routes = [
   {
@@ -15,9 +16,13 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'classroom',
+    path:'classrooms',
     component: ClassroomComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: 'classrooms/:classId/assigments',
+    component: AssigmentsComponentComponent
   },
   {
     path:'',

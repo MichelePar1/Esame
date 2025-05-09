@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe(() => {
-        this.router.navigate([this.requestedUrl ? this.requestedUrl : '/classroom']);
+        this.router.navigate([this.requestedUrl ? this.requestedUrl : '/classrooms']);
       })
   }
 

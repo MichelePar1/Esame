@@ -1,14 +1,16 @@
 <div class="main-layout">
   <div class="sidebar" *ifTeacher>
-    <input [(ngModel)]="className" placeholder="Nome classe">
+    <input [(ngModel)]="className" placeholder="Nome classe" />
     <button (click)="pushClass(className)">Crea classe</button>
+
     <app-student-grid
-    [students]="studentList$ | async"
-    (selecStudent) = "resList($event)"
-    ></app-student-grid>
+      [students]="studentList$ | async"
+      (selecStudent)="resList($event)">
+    </app-student-grid>
+
     <div>
-      <div *ngFor="let student of selectedStudents$ | async;">
-        {{student.firstName}}
+      <div *ngFor="let student of selectedStudents$ | async">
+        {{ student.firstName }}
       </div>
     </div>
   </div>
@@ -16,9 +18,8 @@
   <div class="content">
     <div class="container">
       <div *ngFor="let class of classi$ | async; trackBy: trackById">
-        <app-class-room-card [class]="class"></app-class-room-card>
+        <app-class-room-card [class]="class" (selecClass)="GoToAssigments($event)"></app-class-room-card>
       </div>
     </div>
   </div>
-  
 </div>
