@@ -19,6 +19,7 @@ import { StudentGridComponentTsComponent } from './components/student-grid.compo
 import { AssigmentsComponentComponent } from './pages/assigments.component/assigments.component.component';
 import { AssigmentCardComponent } from './components/assigment-card/assigment-card.component';
 import { IfUserIsStudentDirective } from './utils/if-userIsStudent.directive';
+import { ClassroomContainerComponent } from './pages/classroom-container/classroom-container.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { IfUserIsStudentDirective } from './utils/if-userIsStudent.directive';
     NavUserComponent,
     StudentGridComponentTsComponent,
     AssigmentsComponentComponent,
-    AssigmentCardComponent
+    AssigmentCardComponent,
+    ClassroomContainerComponent
   ],
   imports: [
     BrowserModule,

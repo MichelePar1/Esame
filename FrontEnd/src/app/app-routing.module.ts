@@ -5,6 +5,7 @@ import { ClassroomComponent } from './pages/classroom/classroom.component';
 import { authGuard } from './utils/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { AssigmentsComponentComponent } from './pages/assigments.component/assigments.component.component';
+import { ClassroomContainerComponent } from './pages/classroom-container/classroom-container.component';
 
 const routes: Routes = [
   {
@@ -16,13 +17,19 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path:'classrooms',
-    component: ClassroomComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'classrooms/:classroomId/assigments',
-    component: AssigmentsComponentComponent
+    path: 'classrooms',
+    component: ClassroomContainerComponent,
+    children:[
+        {
+          path:'',
+          component: ClassroomComponent,
+          canActivate: [authGuard]
+      },
+      {
+          path: ':classroomId/assigments',
+          component: AssigmentsComponentComponent
+      },
+    ]
   },
   {
     path:'',
