@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { ClassRoomSourceService } from '../../services/class-room-source.service';
-import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, combineLatest } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subject, switchMap, combineLatest, take } from 'rxjs';
 import { classroomEntity } from '../../entities/classroom.entity';
 import { UserService } from '../../services/user.service';
 import { User } from '../../entities/user.entity';
@@ -46,11 +46,13 @@ export class ClassroomComponent {
       this.selectedStudentsSubject.next(list)
     }
 
-   pushClass(name: string) {
-    this.selectedStudents$.subscribe(students => {
-    this.ClassRoomSrv.addClassroom(students, name).subscribe()})
-    this.refresh$.next()
-    }
+pushClass(name: string) {
+  this.selectedStudents$.pipe(take(1)).subscribe(students => {
+    this.ClassRoomSrv.addClassroom(students, name).subscribe(() => {
+      this.refresh$.next(); 
+    });
+  });
+}
 
     GoToAssigments(classroomId?:string){
     this.router.navigate([`/classrooms/${classroomId}/assigments`]);
