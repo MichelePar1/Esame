@@ -4,9 +4,10 @@ import { User } from '../../entities/user.entity';
 @Component({
   selector: 'app-student-grid',
   standalone: false,
-  templateUrl: './student-grid.component.ts.component.html',
+  templateUrl: './student-grid.ts.component.html',
   styleUrls: ['./student-grid.component.ts.component.css'],
 })
+
 export class StudentGridComponentTsComponent {
   @Input() students!: User[] | null;
   @Output() selecStudent = new EventEmitter<User[]>();

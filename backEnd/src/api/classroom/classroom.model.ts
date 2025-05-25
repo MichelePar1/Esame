@@ -6,6 +6,8 @@ const classroomScheme = new Schema<classEntity>({
     name: String,
     students: [String],
     createdBy: { type: Schema.Types.ObjectId, ref: 'User' } ,
+},{
+    versionKey: false
 });
 
 
@@ -18,7 +20,7 @@ classroomScheme.set('toJSON', {
     virtuals: true,
     transform: (_, ret) => {
         ret.id = ret._id;
-        delete ret.__v;
+        delete ret._v;
         delete ret._id;
         delete ret.students
         return ret;

@@ -16,9 +16,12 @@ const assigmentScheme = new Schema<assigmentEntity>({
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },    
     students:[{
       completed: { type: Boolean, default: false },
-      studentsId: { type: String }}] ,
+      studentsId: { type: String },
+      _id: false}],
     classRoomId: { type: String, required: true },
     forStudent: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }]
+  },{
+    versionKey: false
   });
 
 

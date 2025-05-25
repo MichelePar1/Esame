@@ -7,9 +7,10 @@
     <div class="TopHead">
         <h3>{{assigment?.title}}</h3>
         <p>{{professor.fullName}}</p>
+        <p>Creato il: {{ assigment?.createdAt | date:'yyyy/MM/dd' }}</p>
     </div>
     <div class="middle">
-        <div class="cerchio"><h2>{{professor.fullName[0]}}</h2></div>
+        <div class="cerchio"><h2>{{professor?.fullName[0]}}</h2></div>
     </div>
     <div class="Bottom">
 
@@ -18,10 +19,9 @@
         <div class="card-back">
             <div class="TopHead">
                 <p>{{assigment?.title}}</p>
-                <p>Creato il: {{assigment?.createdAt}}</p>
-                <p>N. studenti che hanno completato: {{assigment?.completedCount}}</p>
+                <p>N. studenti che hanno completato: {{assigment?.completedCount}}/{{assigment?.studentsCount}}</p>
                 <div *ifStudent>
-                <p>Stato completato: {{assigment?.completed}}</p>
+                <p>{{ assigment?.completed ? 'Hai completato questa attività' : 'Devi ancora completare questa attività' }}</p>
                 </div>
             </div>
             

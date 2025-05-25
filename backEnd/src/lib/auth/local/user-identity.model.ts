@@ -9,10 +9,10 @@ const userIdentitySchema = new Schema<UserIdentity>({
             username: String,
             hashedPassword: String
         },
-        _id: false
-    },
-    Reftoken: {type: String, default:''}
-});
+        _id: false,
+    }},{
+    versionKey: false
+    });
 
 userIdentitySchema.pre('findOne', function(next) {
     this.populate('user');

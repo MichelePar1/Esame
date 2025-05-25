@@ -1,4 +1,4 @@
-import { Contains, IsEmail, IsString, IsStrongPassword, IsUrl, Matches, MinLength } from "class-validator";
+import { Contains, IsEmail, IsIn, IsString, IsStrongPassword, IsUrl, Matches, MinLength } from "class-validator";
 import { matches } from "lodash";
 
 export class AddUserDTO {
@@ -8,10 +8,12 @@ export class AddUserDTO {
     lastName!: string;
     @IsEmail()
     username!: string;
-    @MinLength(4)
-    password!: string;
     
+    password!: string;
+
+    @Matches(/^(student|teacher)$/)
     role!: string;
+
     @IsUrl()
     picture!: string;
 }

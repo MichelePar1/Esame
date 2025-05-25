@@ -14,6 +14,7 @@ export class AssigmentCardComponent {
   assigment: assigmentEntity|undefined
   
   professor: any
+
   
   @Output()
   selecAssigment = new EventEmitter<string>();

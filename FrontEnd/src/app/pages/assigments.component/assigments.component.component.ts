@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { combineLatest, ReplaySubject, switchMap } from 'rxjs';
-import { AssigmentsServiceService } from '../../services/assigments.service.service';
+import { AssigmentsServiceService } from '../../services/assigments.service';
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({

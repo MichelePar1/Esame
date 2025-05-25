@@ -6,13 +6,17 @@ const userSchema = new Schema<User>({
     lastName: String,
     role: String,
     picture: String
-})
+},{
+  //non salvo la versione   
+  versionKey: false
+});
 
 userSchema.set('toJSON', {
     virtuals: true,
     transform: (_, ret) => {
+        ret.id = ret._id
         delete ret._id;
-        delete ret.__v;
+        delete ret._v;
         return ret;
     }
 });
@@ -21,7 +25,7 @@ userSchema.set('toObject', {
     virtuals: true,
     transform: (_, ret) => {
         delete ret._id;
-        delete ret.__v;
+        delete ret._v;
         return ret;
     }
 });
