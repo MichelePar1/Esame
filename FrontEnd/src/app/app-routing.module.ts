@@ -19,11 +19,11 @@ const routes: Routes = [
   {
     path: 'classrooms',
     component: ClassroomContainerComponent,
+    canActivate: [authGuard],
     children:[
         {
           path:'',
           component: ClassroomComponent,
-          canActivate: [authGuard]
       },
       {
           path: ':classroomId/assigments',

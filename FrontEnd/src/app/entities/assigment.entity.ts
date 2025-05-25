@@ -8,4 +8,5 @@ export type assigmentEntity = {
     completedCount: number
     completed?: boolean
     studentsCount: number
+    createdAt: Date
 }
