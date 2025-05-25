@@ -25,9 +25,10 @@
                 </div>
             </div>
             
-            <div class="middle" *ifStudent>
-            
-                <button (click)="CompleteAssigment(assigment?.id)" [disabled]="assigment?.completed">Segna come completato</button>
+            <div class="middle" *ifStudent> 
+                <div *ngIf="assigment?.completed===false">
+                   <button (click)="CompleteAssigment(assigment?.id)">Segna come completato</button>
+                </div>
             </div>
             <div class="middle" *ifTeacher>
                 <p>Assignment assegnato a {{assigment?.studentsCount}} studenti</p>
