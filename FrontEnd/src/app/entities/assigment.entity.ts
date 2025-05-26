@@ -10,3 +10,4 @@ export type assigmentEntity = {
     studentsCount: number
     createdAt: Date
 }
+

@@ -4,7 +4,7 @@ import { User } from "../../user/user.entity";
 import { Request, Response, NextFunction } from "express";
 import { assigmentDto } from "./assigment.dto";
 import { assigmentEntity } from "./assigments.entity";
-import { addAssigment, fetchAssigment, checkCompleted } from "./assigments.service";
+import { addAssigment, fetchAssigment, checkCompleted, fetchAssigmentInfo } from "./assigments.service";
 import { classEntity } from "../classroom.entity";
 import mongoose from "mongoose";
 import { ClassRoomNotFoundError } from "../../../errors/classRoom-not-found.error";
@@ -68,7 +68,7 @@ export const listAssigments = async (
       const userId = (req.user as User).id!
       const classId = req.params.classId;
       const result = await fetchAssigment(userId, classId)
-
+      
     res.json(result).status(200)
   }catch(err){
     next(err)
@@ -85,6 +85,7 @@ export const CompleteAssigment = async (
       const assigmentId = req.params.id
 
       const result = await checkCompleted(userId, classId, assigmentId)
+
   
       if(!result){
         throw new WrongAssigmentError()
@@ -98,3 +99,19 @@ export const CompleteAssigment = async (
 
 }
 
+export const listAssigmentsInfo = async (
+  req: TypedRequest<assigmentDto>, 
+  res: Response, 
+  next: NextFunction) => {
+    try{      
+      const userId = (req.user as User).id!
+      const classId = req.params.classId;
+      const result = await fetchAssigmentInfo(userId, classId)
+      const responseInfo = result!.map((ass: any) => ({
+        students: ass.students               
+}));
+    res.json(responseInfo).status(200)
+  }catch(err){
+    next(err)
+  }
+}

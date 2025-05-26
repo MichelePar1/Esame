@@ -10,6 +10,7 @@ export function isTeacher(
   ): void {
     if ((req.user as User).role !== 'teacher') {
        res.status(404).json({ message: 'Accesso negato: non sei un insegnante' });
+       return
     }
     
     next();

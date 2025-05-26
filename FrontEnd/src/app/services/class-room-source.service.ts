@@ -23,7 +23,6 @@ addClassroom(studentsInput: User[], name: string): Observable<classroomEntity[]>
     students.push(s.id);
   }
   });
-  console.log(students)
 
   return this.http.post<classroomEntity[]>('/api/classrooms', { students, name });
 }

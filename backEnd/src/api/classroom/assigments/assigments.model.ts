@@ -16,7 +16,8 @@ const assigmentScheme = new Schema<assigmentEntity>({
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },    
     students:[{
       completed: { type: Boolean, default: false },
-      studentsId: { type: String },
+      studentsId: { type: Schema.Types.ObjectId, ref: 'User'},
+      completedDate: { type: Date, default: null },
       _id: false}],
     classRoomId: { type: String, required: true },
     forStudent: [{ type: Schema.Types.ObjectId, ref: 'User', required: true }]
@@ -34,6 +35,7 @@ assigmentScheme.virtual('completedCount').get(function(){
   })
   return c
 })
+
 assigmentScheme.virtual('completed').get(function(){
   const student = this.forStudent?.[0] as any;
   let completed

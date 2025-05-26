@@ -21,7 +21,6 @@ export class ClassRoomCardComponent {
   professor: any
   
   ngOnInit(){
-    console.log(this.class)
     this.professor = this.class.createdBy as User
   }
 

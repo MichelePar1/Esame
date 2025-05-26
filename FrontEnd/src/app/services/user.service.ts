@@ -12,7 +12,6 @@ export class UserService {
 
   
   register(user: User){
-    console.log(user)
     return this.http.post<User>('/api/register', user)  
   }
 

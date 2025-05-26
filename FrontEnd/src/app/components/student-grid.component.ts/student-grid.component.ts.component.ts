@@ -14,9 +14,6 @@ export class StudentGridComponentTsComponent {
 
   studentIds: User[] = [];
 
-  ngOnInit() {
-    console.log(this.students);
-  }
 
   onListChange(user: User) {
     if (user?.id) {

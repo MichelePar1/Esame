@@ -19,5 +19,8 @@ router.get('/', getClass)
 router.post('/:classId/assigments', validate(assigmentDto), isTeacher, assignmentsController.createAssigment)
 router.get('/:classId/assigments', isInClass, assignmentsController.listAssigments)
 router.patch('/:classId/assignments/:id', isStudent ,isInClass, assignmentsController.CompleteAssigment)
+//per prendere le informazioni dei compiti nel frontEnd
+router.get('/:classId/assigmentsInfo', isInClass, assignmentsController.listAssigmentsInfo)
+
 
 export default router;

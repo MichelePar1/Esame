@@ -1,18 +1,27 @@
-
 <div class="main-layout">
-    <div class="sidebar" *ifTeacher>
-     <input [(ngModel)]="assimnetName" placeholder="Nome compito" />
+  <div class="sidebar" *ifTeacher>
+    <input [(ngModel)]="assimnetName" placeholder="Nome compito" />
     <button (click)="pushAssignment(assimnetName)">Crea compito</button>
 
+    <div *ngFor="let assigment of assigments$ | async; let i = index" class="assignment-details">
+      <h2>Dettagli compito: {{ assigment.title }}</h2>
+      <p>Studenti collegati:</p>
+      <ul>
+        <li *ngFor="let s of studentsAssigmentInfo[i]?.students">
+          <span>{{ getStudentName(s) }}</span> - 
+          <span [class.completed]="s.completed">{{ s.completed ? 'Completato' : 'Non completato' }}</span>
+          <span *ngIf="s.completedDate!=null">Data completamento: {{ s.completedDate | date:'dd/MM/yyyy' }}</span>
+        </li>
+      </ul>
     </div>
+  </div>
 
-    <div class="container">
-         <div *ngFor="let assigment of assigments$ | async">
-            <app-assigment-card
-            [assigment]="assigment"
-            (selecAssigment)="patchAssigment($event)"
-            ></app-assigment-card>
-         </div>
+  <div class="container">
+    <div *ngFor="let assigment of assigments$ | async">
+      <app-assigment-card
+        [assigment]="assigment"
+        (selecAssigment)="patchAssigment($event)">
+      </app-assigment-card>
     </div>
-    
+  </div>
 </div>

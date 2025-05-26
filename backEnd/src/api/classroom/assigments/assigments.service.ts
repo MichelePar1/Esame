@@ -45,11 +45,29 @@ export async function fetchAssigment(userId: string, classRoomId: string): Promi
   }
 
   const checkedAssigment = await assigmentModel.findOneAndUpdate({_id:assigmentId, 'students.studentsId': userId, classRoomId: classId},
-  {'students.$.completed': true},{new:true}).populate('createdBy')
+  {'students.$.completed': true, 'students.$.completedDate': Date.now()},{new:true}).populate('createdBy')
   .populate({
     path:'forStudent',
     match:{_id: userId}
   }
   )
   return checkedAssigment
+}
+
+export async function fetchAssigmentInfo(userId: string, classRoomId: string): Promise<assigmentEntity[] | null> {
+  const listOfAssig = await assigmentModel.find(
+    {
+      $or: [
+        { 'students.studentsId': userId, classRoomId: classRoomId }, 
+        { createdBy: userId, classRoomId: classRoomId }
+          ]}
+  )
+  .populate('createdBy')
+  .populate('students.studentsId')
+  .populate({
+    path:'forStudent',
+    match:{_id: userId}
+  }
+  )
+  return listOfAssig
 }
