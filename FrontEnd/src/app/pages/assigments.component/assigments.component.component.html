@@ -8,9 +8,9 @@
       <p>Studenti collegati:</p>
       <ul>
         <li *ngFor="let s of studentsAssigmentInfo[i]?.students">
-          <span>{{ getStudentName(s) }}</span> - 
+          <span>{{ getStudentName(s) }}</span> 
           <span [class.completed]="s.completed">{{ s.completed ? 'Completato' : 'Non completato' }}</span>
-          <span *ngIf="s.completedDate!=null">Data completamento: {{ s.completedDate | date:'dd/MM/yyyy' }}</span>
+          <span *ngIf="s.completedDate!=null">Data completamento: {{ s.completedDate | date:'dd/MM/yyyy HH:mm' }}</span>
         </li>
       </ul>
     </div>
