@@ -5,7 +5,7 @@
 
     <div *ngFor="let assigment of assigments$ | async; let i = index" class="assignment-details">
       <h2>Dettagli compito: {{ assigment.title }}</h2>
-      <p>Studenti collegati:</p>
+      <p>Info:</p>
       <ul>
         <li *ngFor="let s of studentsAssigmentInfo[i]?.students">
           <span>{{ getStudentName(s) }}</span> 
